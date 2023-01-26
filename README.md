@@ -1,12 +1,14 @@
 # CockroachDB Change Data Capture (CDC) Integration with Synapse via Azure Blob Storage
 
-CockroachDB is an OLTP database which is perfect for supporting critical line of business applications. However, a clients architecture will often contain many tools for analyzing data to help inform better business decisions. This means that a line of business databases like CockroachDB must be able integrate with other systems to help perform this analysis. Previously, many data analytical tools would have been out of reach to many businesses due to cost, but with the rise in popularity of hyper-scalers many more tools for analyzing data have become within the reach. 
+CockroachDB is an OLTP database with is perfect for supporting critical line of business applications. However, a clients architecture will often contain many tools for analyzing data to help inform better business decisions. This means that a line of business database like CockroachDB must be able integrate with other systems to help perform this analysis. Previously, many data analytical tool would have been out of reach to many businesses due to cost but the raise in popularity of the hyper-scalers many more tools for analyzing data have become within reach. 
 
-Microsoft Azure is the second most popular cloud provider and has many data analytics tools. In this tutorial we will look at how we can expose data from CockroachDB, which is often used to store data for transactional systems. This data would then be passed to Azure Synapse. 
+Microsoft Azure is the second most popular cloud provider and has many data analytics tools. In this tutorial we will look at how we can expose data form CockroachDB, which is often used to store data for transactional systems. This data would then be passed to Azure Synapse. 
 
 Azure Synapse Analytics is a limitless analytics service that brings together data integration, enterprise data warehousing, and big data analytics. It gives you the freedom to query data on your terms, using either serverless or dedicated options—at scale. Azure Synapse brings these worlds together with a unified experience to ingest, explore, prepare, transform, manage, and serve data for immediate BI and machine learning needs.
 
-If you would like to follow along then you will need the below prerequisites to get started.
+If you would like to follow along then you will need to get started.
+
+List of prerequisites.
 
 - [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli)
 - A CockroachDB Cluster running in Azure!
@@ -15,7 +17,7 @@ If you would like to follow along then you will need the below prerequisites to 
 
 ## Step 1: Prepare Your Variables
 
-To standardise the code in further steps a number of variables should be set.
+To standardize the code in further steps a number of variables should be set.
 
 ```
 loc1="uksouth"
@@ -26,7 +28,7 @@ loc1_cdc_storagecontainer="uksouth-cdc"
 ```
 ## Step 2: Create an Azure Storage Account and Container
 
-CockroachDB's Change Data Capture feature has the ability to send row level changes to object storage, in this case Azure blob storage. 
+CockroachDB's Change Data Capture feature has the ability to send row level changes to object storage, in this case Azure blob storage. Create a storage account first.
 
 ```
 az storage account create \
@@ -36,6 +38,7 @@ az storage account create \
   --sku Standard_RAGRS \
   --kind StorageV2
 ```
+Then a storage container.
 
 ```
 az storage container create \
@@ -43,6 +46,8 @@ az storage container create \
  --fail-on-exist \
  --account-name $loc1_cdc_storage_account
 ```
+
+A location to send data to has now been created.
 
 ## Step 3: Upgrade Azure Blob Storage with Azure Data Lake Storage Gen2 capabilities Validate your storage account by using the following command.
 
@@ -75,7 +80,6 @@ Example Output:
  "endTime": "2021-08-04T18:40:34.9371480Z"
 }
 ```
-
 
 After your account has been successfully validated, start the upgrade by running the following command.
 
