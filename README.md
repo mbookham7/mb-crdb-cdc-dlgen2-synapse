@@ -1,14 +1,12 @@
 # CockroachDB Change Data Capture (CDC) Integration with Synapse via Azure Blob Storage
 
-CockroachDB is an OLTP database with is perfect for supporting critical line of business applications. However, a clients architecture will often contain many tools for analyzing data to help inform better business decisions. This means that a line of business database like CockroachDB must be able integrate with other systems to help perform this analysis. Previously, many data analytical tool would have been out of reach to many businesses due to cost but the raise in popularity of the hyper-scalers many more tools for analyzing data have become within the reach. 
+CockroachDB is an OLTP database which is perfect for supporting critical line of business applications. However, a clients architecture will often contain many tools for analyzing data to help inform better business decisions. This means that a line of business databases like CockroachDB must be able integrate with other systems to help perform this analysis. Previously, many data analytical tools would have been out of reach to many businesses due to cost, but with the rise in popularity of hyper-scalers many more tools for analyzing data have become within the reach. 
 
-Microsoft Azure is the second most popular cloud provider and has many data analytics tools. In this tutorial we will look at how we can expose data form CockroachDB, which is often used to store data for transactional systems. This data would then be passed to Azure Synapse. 
+Microsoft Azure is the second most popular cloud provider and has many data analytics tools. In this tutorial we will look at how we can expose data from CockroachDB, which is often used to store data for transactional systems. This data would then be passed to Azure Synapse. 
 
 Azure Synapse Analytics is a limitless analytics service that brings together data integration, enterprise data warehousing, and big data analytics. It gives you the freedom to query data on your terms, using either serverless or dedicated options—at scale. Azure Synapse brings these worlds together with a unified experience to ingest, explore, prepare, transform, manage, and serve data for immediate BI and machine learning needs.
 
-If you would like to follow along then you will need to get started.
-
-List of prerequisites.
+If you would like to follow along then you will need the below prerequisites to get started.
 
 - [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli)
 - A CockroachDB Cluster running in Azure!
@@ -17,7 +15,7 @@ List of prerequisites.
 
 ## Step 1: Prepare Your Variables
 
-To standardize the code in further steps a number of variables should be set.
+To standardise the code in further steps a number of variables should be set.
 
 ```
 loc1="uksouth"
