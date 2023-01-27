@@ -1,10 +1,10 @@
 # CockroachDB Change Data Capture (CDC) Integration with Synapse via Azure Blob Storage
 
-CockroachDB is an OLTP database witch is perfect for supporting critical line of business applications. However, a clients architecture will often contain many tools for analyzing data to help inform better business decisions. This means that a line of business database like CockroachDB must be able integrate with other systems to help perform this analysis. Previously, many data analytical tool would have been out of reach to many businesses due to cost but the raise in popularity of the hyper-scalers many more tools for analyzing data have become within reach. 
+CockroachDB is an OLTP database which is perfect for supporting critical line of business applications. However, a clients architecture will often contain many tools for analyzing data to help inform better business decisions. This means that a line of business database like CockroachDB must be able integrate with other systems to help perform this analysis. Previously, many data analytical tool would have been out of reach to many businesses due to cost but the rise in popularity of the hyper-scalers many more tools for analyzing data have become within reach. 
 
-Microsoft Azure is the second most popular cloud provider and has many data analytics tools. In this tutorial we will look at how we can expose data form CockroachDB, which is often used to store data for transactional systems. This data would then be passed to Azure Synapse. 
+Microsoft Azure is one of the most popular cloud providers and has many data analytics tools. In this tutorial we will look at how we can expose data from CockroachDB, which is often used to store data for transactional systems. This data would then be passed to Azure Synapse. 
 
-Azure Synapse Analytics is a limitless analytics service that brings together data integration, enterprise data warehousing, and big data analytics. It gives you the freedom to query data on your terms, using either serverless or dedicated options—at scale. Azure Synapse brings these worlds together with a unified experience to ingest, explore, prepare, transform, manage, and serve data for immediate BI and machine learning needs.
+Azure Synapse Analytics is a limitless analytics service that brings together data integration, enterprise data warehousing, and big data analytics. It gives you the freedom to query data on your terms, using either serverless or dedicated options—at scale. Azure Synapse brings these worlds together with a unified experience to ingest, explore, prepare, transform, manage, and serve data for immediate self service BI and machine learning needs. 
 
 If you would like to follow along then you will need to get started.
 
@@ -193,4 +193,7 @@ You are able to see the totals in the image below represented by a bar chart.
 
 # Final Thoughts
 
-It important when adopting any new technology that you can be sure that it will seamlessly integrate with the existing architecture. In this example we can see that by taking advantage of the builtin capabilities of CockroachDB like Change Data Capture (CDC) we can make line of business data available for downstream systems. By sharing data between systems in this way businesses are able to make better informed decisions quicker enabling them to pivot fast in the ever changing landscape. Staying one step ahead of their competitors. CockroachDB is able to scale fast, service anywhere and thrive everywhere!
+In conclusion, combining analytical tools like Azure Synapse with transactional databases like CockroachDB can have a positive impact for many companies. Real-time data replication is made possible via CockroachDB's Change Data Capture (CDC) capability, making it simple to interface with analytical software like Azure Synapse. While guaranteeing that transactional data is highly available and consistent, this integration allows enterprises to obtain insights and make data-driven choices in real-time. The scalability, resilience, and consistency properties of CockroachDB help ensure that the data is correct and dependable despite heavy loads and failures. CockroachDB's data locality feature also facilitates global deployments and low-latency data access. Generally speaking, firms can gain a competitive edge by using data-driven decisions by combining CockroachDB with analytical tools like Azure Synapse.
+
+Code here.
+https://github.com/mbookham7/mb-crdb-cdc-dlgen2-synapse
