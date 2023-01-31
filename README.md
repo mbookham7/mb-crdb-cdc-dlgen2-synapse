@@ -1,14 +1,12 @@
 # CockroachDB Change Data Capture (CDC) Integration with Synapse via Azure Blob Storage
 
-CockroachDB is an OLTP database which is perfect for supporting critical line of business applications. However, a clients architecture will often contain many tools for analyzing data to help inform better business decisions. This means that a line of business database like CockroachDB must be able integrate with other systems to help perform this analysis. Previously, many data analytical tool would have been out of reach to many businesses due to cost but the rise in popularity of the hyper-scalers many more tools for analyzing data have become within reach. 
+CockroachDB is an Distributed SQL OLTP database which is perfect for supporting critical line of business applications that have scale and resiliency requirements. However, an organization’s data architecture will often contain many tools, including something for transforming, shaping & analyzing data to help inform better business decisions. This means that a line of business database like CockroachDB must be able to integrate with such systems to help customer teams achieve those outcomes for business. 
 
-Microsoft Azure is one of the most popular cloud providers and has many data analytics tools. In this tutorial we will look at how we can expose data from CockroachDB, which is often used to store data for transactional systems. This data would then be passed to Azure Synapse. 
+Microsoft Azure is one of the largest cloud providers and has many popular data analytics tools in its portfolio. In this tutorial we will look at how we can send data using change data capture in CockroachDB to one of those services, Azure Synapse. 
 
 Azure Synapse Analytics is a limitless analytics service that brings together data integration, enterprise data warehousing, and big data analytics. It gives you the freedom to query data on your terms, using either serverless or dedicated options—at scale. Azure Synapse brings these worlds together with a unified experience to ingest, explore, prepare, transform, manage, and serve data for immediate self service BI and machine learning needs. 
 
-If you would like to follow along then you will need to get started.
-
-List of prerequisites.
+If you would like to follow along these are the prerequisites:
 
 - [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli)
 - A CockroachDB Cluster running in Azure!
@@ -17,7 +15,7 @@ List of prerequisites.
 
 ## Step 1: Prepare Your Variables
 
-To standardize the code in further steps a number of variables should be set.
+To standardise the code in further steps a number of variables should be set.
 
 ```
 loc1="uksouth"
@@ -28,7 +26,7 @@ loc1_cdc_storagecontainer="uksouth-cdc"
 ```
 ## Step 2: Create an Azure Storage Account and Container
 
-CockroachDB's Change Data Capture feature has the ability to send row level changes to object storage, in this case Azure blob storage. Create a storage account first.
+CockroachDB's [Change Data Capture](https://www.cockroachlabs.com/docs/stable/change-data-capture-overview.html) feature has the ability to send row level changes to object storage, in this case Azure blob storage. Create a storage account first.
 
 ```
 az storage account create \
@@ -38,7 +36,7 @@ az storage account create \
   --sku Standard_RAGRS \
   --kind StorageV2
 ```
-Then a storage container.
+Then a storage container within that storage account.
 
 ```
 az storage container create \
@@ -47,7 +45,7 @@ az storage container create \
  --account-name $loc1_cdc_storage_account
 ```
 
-A location to send data to has now been created.
+Now we’ve a destination to send the data to from CockroachDB.
 
 ## Step 3: Upgrade Azure Blob Storage with Azure Data Lake Storage Gen2 capabilities Validate your storage account by using the following command.
 
@@ -89,13 +87,13 @@ az storage account hns-migration start --type upgrade -n $loc1_cdc_storage_accou
 
 ## Step 4: Enable Change Data Capture
 
-Change data capture (CDC) provides efficient, distributed, row-level changefeeds into a configurable sink for downstream processing such as reporting, caching, or full-text indexing. In the case of this demo we will be configuring CockroachDB Change Feeds (CDC) to sink data with our storage account in Azure. This storage account has now been configured as a data lake.
+[Change data capture](https://www.cockroachlabs.com/docs/stable/change-data-capture-overview.html) (CDC) provides efficient, distributed, row-level changefeeds into a configurable sink for downstream processing such as reporting, caching, or full-text indexing. In this particular case, we will be configuring the changefeed (CDC) to send data to the above configured storage account in Azure. This storage account has now been configured as a data lake.
 
 ### Retrieve the storage account keys from Azure
 
-In order to to configure CDC we need to obtain the storage account keys for our storage account this will allow us to authenticate successfully.
+In order to configure CDC we need to obtain the account keys for our storage account which will allow us to authenticate to it.
 
-Run the following command to display you account key.
+Run the following command to display your account key.
 
 ```
 az storage account keys list -g $rg -n $loc1_cdc_storage_account --query "[0].value" -o tsv
@@ -114,7 +112,9 @@ fot2mB%2FdHfvPm1PwDvjToArXxQcgDMITR8LQ3fDumqZVLpSUhY7UA7gDuRCsXVk88SMcikpd1AHj%2
 
 ### Configure CockroachDB CDC in Kubernetes
 
-In this example CockroachDB is running in Azure Kubernetes Service. To connect to the cluster we deploy a pod running the cockroach binary with the correct certificate. First create the pod using the command below.
+In this example CockroachDB is running in Azure Kubernetes Service. If you would like the instructions on how to build a multi region AKS solution to run CockroachDB then please take a look at this [repo](https://github.com/mbookham7/mb-crdb-multi-region-aks).
+
+To connect to the cluster we deploy a pod running the CockroachDB binary with the required certificate. First create the pod using the command below.
 
 ```
 kubectl create -f https://raw.githubusercontent.com/cockroachdb/cockroach/master/cloud/kubernetes/multiregion/client-secure.yaml --namespace $loc1
