@@ -155,7 +155,11 @@ cockroach workload run movr --tolerate-errors --duration=99999m 'postgresql://cr
 
 ## Step 5: Run a query against Azure Datalake Gen2 with Synapse
 
-In the Azure Portal create and Synapse workspace. Once created open Open Synapse Studio form the Getting Started tile in the main window.
+In the Azure Portal create and Synapse workspace. In the search bar at the top and search for Synapse click on the add button and complete wizard that is presented.
+
+![Create Synapse Workspace](./images/synapse-img4.png)
+
+Once created open Open Synapse Studio form the Getting Started tile in the main window.
 
 ![Open Synapse Studio](./images/synapse-img2.png)
 
